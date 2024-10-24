@@ -14,7 +14,7 @@
             <div class="logo-text">Mark<span>gros</span></div>
         </div>
         
-        <form>
+        <form action="back-inscription.php" method="post">
             <div class="form-group">
                 <label for="nom">Nom</label>
                 <div class="input-container">
@@ -33,7 +33,7 @@
                     <input type="text" id="prenom" name="prenom" required
                            pattern="[A-Za-z\s]+"
                            title="Lettres uniquement"
-                           placeholder="Wilfried Kign">
+                           placeholder="Wilfried Kigninman">
                 </div>
             </div>
 
@@ -56,10 +56,21 @@
                 </div>
             </div>
 
+            <!-- Ajout du champ Email -->
+            <div class="form-group">
+                <label for="email">Adresse Email</label>
+                <div class="input-container">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" name="email" required
+                           placeholder="exemple@mail.com"
+                           title="Veuillez entrer une adresse email valide.">
+                </div>
+            </div>
+
             <div class="photo-upload">
                 <div class="photo-container">
                     <label for="photo-input" class="photo-placeholder">
-                        <span class="initials">YK</span>
+                        <span class="initials">Me</span>
                         <img src="" alt="Photo de profil" class="photo-preview">
                     </label>
                     <label for="photo-input" class="camera-icon">
@@ -99,12 +110,13 @@
 
         <div class="login-link">
             <p>Avez-vous déjà un compte ?</p>
-            <a href="login.html" class="login-btn">
+            <a href="./connexion.php" class="login-btn">
                 <i class="fas fa-sign-in-alt"></i>
                 <span>Se connecter</span>
             </a>
         </div>
     </div>
+
     <script>
         const photoInput = document.getElementById('photo-input');
         const photoPreview = document.querySelector('.photo-preview');

@@ -46,7 +46,7 @@
 
         <div class="signup-link">
             <p>Pas encore de compte ?</p>
-            <a href="register.html" class="signup-btn">
+            <a href="inscription.php" class="signup-btn">
                 <i class="fas fa-user-plus"></i> S'inscrire
             </a>
         </div>
