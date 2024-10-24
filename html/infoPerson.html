@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/infoPerson.css">
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- En-tête -->
+        <div class="en-tete">
+            <button class="btn-retour">
+                <i data-lucide="arrow-left"></i>
+            </button>
+            <img class="logo" src="../img/logoMarkgros.png" alt="logoMarkgros">
+        </div>
+
+        <div class="section-principale">
+            <h1>Informations personnelles</h1>
+
+            <div class="info-utilisateur">
+                <div class="photo-utilisateur">
+                    <img src="../img/portrait-father-his-backyard.jpg" alt="Photo de l'utilisateur" class="photo" />
+                </div>
+                <div class="champ">
+                    <label for="matricule">Numéro de matricule :</label>
+                    <p id="matricule">MATRICULE123</p>
+                </div>
+                <div class="champ">
+                    <label for="nom">Nom :</label>
+                    <p id="nom">Dupont</p>
+                </div>
+                <div class="champ">
+                    <label for="prenom">Prénom :</label>
+                    <p id="prenom">Jean</p>
+                </div>
+                <div class="champ">
+                    <label for="date-naissance">Date de naissance :</label>
+                    <p id="date-naissance">01/01/1990</p>
+                </div>
+                <div class="champ">
+                    <label for="ville">Ville :</label>
+                    <p id="ville">Abidjan</p>
+                </div>
+                <div class="champ">
+                    <label for="email">Email :</label>
+                    <p id="email">jean.dupont@example.com</p>
+                </div>
+                <div class="champ">
+                    <label for="telephone">Téléphone :</label>
+                    <p id="telephone">+225 07 12 34 56</p>
+                </div>
+            </div>
+
+            <div class="groupe-boutons">
+                <button class="btn-modifier">Modifier mes Informations</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
