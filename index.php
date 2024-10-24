@@ -11,8 +11,8 @@
         <img src="./img/logoMarkgros.png" alt="Logo" class="logo">
         <p class="description">La plateforme qui facilite la vente en ligne des produits électroménagers</p>
         <div class="btn-group">
-            <a href="inscription.html" class="btn btn-signup">S'inscrire</a>
-            <a href="connexion.html" class="btn btn-login">Se connecter</a>
+            <a href="./php/inscription.php" class="btn btn-signup">S'inscrire</a>
+            <a href="./php/connexion.php" class="btn btn-login">Se connecter</a>
         </div>
         <a href="accueil.html" class="ignore">Ou ignorer</a>
     </div>
