@@ -54,8 +54,8 @@ body {
 }
 
 .logo {
+    width: 10%;
     margin-left: auto;
-    color: #333;
     font-weight: 500;
 }
 
@@ -99,7 +99,7 @@ body {
 }
 
 .titre-produit {
-    color: #4A4A9E;
+    color: #4C4C8A;
     font-size: 1.2rem;
     font-weight: 500;
 }
@@ -152,7 +152,7 @@ body {
 
 .btn-panier {
     flex: 1;
-    background: #4A4A9E;
+    background: #4C4C8A;
     color: white;
     border: none;
     padding: 15px;
@@ -187,7 +187,7 @@ body {
 
 .btn-credit {
     width: 100%;
-    background: #4A4A9E;
+    background: #4C4C8A;
     color: white;
     border: none;
     padding: 15px 20px;
