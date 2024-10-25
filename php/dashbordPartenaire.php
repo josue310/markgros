@@ -1,3 +1,49 @@
+<?php
+require_once("../bd/dbconnect.php");
+
+if (isset($_POST['ajouterProduit'])) {
+    if (!empty($_POST['nomProduit']) && !empty($_POST['descriptionProduit']) && !empty($_POST['prixUniProduit']) && !empty($_POST['quantiteProduit'])) {
+        $nomProduit = $_POST['nomProduit'];
+        $descriptionProduit = $_POST['descriptionProduit'];
+        $prixUniProduit = $_POST['prixUniProduit'];
+        $quantiteProduit = $_POST['quantiteProduit'];
+
+        // Vérification et traitement de l'image
+        if (isset($_FILES['imageProduit']) && $_FILES['imageProduit']['error'] == 0) {
+            $nomImage = $_FILES['imageProduit']['name'];
+            $cheminImage = '../img/uploads/' . $nomImage;
+
+            // Déplacer le fichier uploadé vers le répertoire cible
+            if (move_uploaded_file($_FILES['imageProduit']['tmp_name'], $cheminImage)) {
+                // Requête pour ajouter un nouveau produit
+                $query = "INSERT INTO produit (nomProduit, descriptionProduit, prixUniProduit, quantiteProduit, imageProduit) VALUES (:nomProduit, :descriptionProduit, :prixUniProduit, :quantiteProduit, :imageProduit)";
+                $statement = $conn->prepare($query);
+                $statement->bindParam(':nomProduit', $nomProduit, PDO::PARAM_STR);
+                $statement->bindParam(':descriptionProduit', $descriptionProduit, PDO::PARAM_STR);
+                $statement->bindParam(':prixUniProduit', $prixUniProduit, PDO::PARAM_STR);
+                $statement->bindParam(':quantiteProduit', $quantiteProduit, PDO::PARAM_INT);
+                $statement->bindParam(':imageProduit', $cheminImage, PDO::PARAM_STR);
+
+                if ($statement->execute()) {
+                    $produitAjoute = "Produit ajouté avec succès.";
+                } else {
+                    echo "Erreur lors de l'ajout du produit.";
+                }
+            } else {
+                echo "Erreur lors du déplacement de l'image.";
+            }
+        } else {
+            echo "Erreur lors du téléchargement de l'image.";
+            exit;
+        }
+    } else {
+        echo "Tous les champs sont requis.";
+    }
+} else {
+    echo "Méthode de requête invalide.";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -32,22 +78,29 @@
                 </div>
             </section>
 
+            <!-- Section pour ajouter un produit -->
             <section id="ajout-produit" class="section">
                 <h2>Ajouter un produit</h2>
-                <form class="product-form">
+                <?php if (isset($produitAjoute)) : ?>
+                    <div style="color: green;"><?php echo $produitAjoute; ?></div>
+                <?php endif; ?>
+                <form class="product-form" method="POST" action="" enctype="multipart/form-data">
                     <label for="product-name">Nom du produit</label>
-                    <input type="text" id="product-name" name="product-name" required>
+                    <input type="text" id="product-name" name="nomProduit" required>
 
                     <label for="product-description">Description</label>
-                    <textarea id="product-description" name="product-description" required></textarea>
+                    <textarea id="product-description" name="descriptionProduit" required></textarea>
 
                     <label for="product-price">Prix</label>
-                    <input type="number" id="product-price" name="product-price" required>
+                    <input type="number" id="product-price" name="prixUniProduit" required>
+
+                    <label for="product-quantity">Quantité en stock</label>
+                    <input type="number" id="product-quantity" name="quantiteProduit" required>
 
                     <label for="product-image">Image du produit</label>
-                    <input type="file" id="product-image" name="product-image" accept="image/*" required>
+                    <input type="file" id="product-image" name="imageProduit" accept="image/*" required>
 
-                    <button type="submit" class="btn-primary">Ajouter le produit</button>
+                    <button type="submit" class="btn-primary" name="ajouterProduit">Ajouter le produit</button>
                 </form>
             </section>
 
