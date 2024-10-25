@@ -51,6 +51,7 @@
                 </form>
             </section>
 
+            <!-- Section pour gérer les commandes -->
             <section id="gerer-commandes" class="section">
                 <h2>Gérer les Commandes</h2>
                 <table class="styled-table">
@@ -76,30 +77,55 @@
         function loadCommandes() {
             const commandes = [
                 {id: 1, produit: 'Produit A', quantite: 2, statut: 'En attente'},
-                {id: 2, produit: 'Produit B', quantite: 1, statut: 'Livré'}
+                {id: 2, produit: 'Produit B', quantite: 1, statut: 'Validé'},
+                {id: 3, produit: 'Produit C', quantite: 3, statut: 'En livraison'}
             ];
 
             let commandeList = document.getElementById('commande-list');
             commandeList.innerHTML = '';
 
             commandes.forEach(commande => {
+                let actionButtons = '';
+
+                if (commande.statut === 'En attente') {
+                    actionButtons = `
+                        <button class="btn-primary" onclick="validerCommande(${commande.id})">Valider</button>
+                        <button class="btn-danger" onclick="rejeterCommande(${commande.id})">Rejeter</button>
+                    `;
+                } else if (commande.statut === 'En livraison') {
+                    actionButtons = `
+                        <button class="btn-primary" onclick="livrerCommande(${commande.id})">Marquer comme livré</button>
+                    `;
+                } else {
+                    actionButtons = `Aucune action disponible`;
+                }
+
                 let row = `
                     <tr>
                         <td>${commande.id}</td>
                         <td>${commande.produit}</td>
                         <td>${commande.quantite}</td>
                         <td>${commande.statut}</td>
-                        <td>
-                            <button class="btn-primary" onclick="gererCommande(${commande.id})">Mettre à jour</button>
-                        </td>
+                        <td>${actionButtons}</td>
                     </tr>
                 `;
                 commandeList.innerHTML += row;
             });
         }
 
-        function gererCommande(id) {
-            alert('Gestion de la commande avec ID ' + id);
+        function validerCommande(id) {
+            alert('Commande validée avec ID ' + id);
+            // Mettre à jour le statut dans la base de données
+        }
+
+        function rejeterCommande(id) {
+            alert('Commande rejetée avec ID ' + id);
+            // Mettre à jour le statut dans la base de données
+        }
+
+        function livrerCommande(id) {
+            alert('Commande marquée comme livrée avec ID ' + id);
+            // Mettre à jour le statut dans la base de données
         }
 
         document.addEventListener('DOMContentLoaded', loadCommandes);
