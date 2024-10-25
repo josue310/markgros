@@ -1,3 +1,22 @@
+<?php
+session_start();
+require_once("../bd/dbconnect.php"); // Fichier PHP contenant la connexion à votre BDD
+require_once("fonction.php");
+
+// Récupérer les produits depuis la base de données
+$query = "SELECT * FROM produit"; // Assurez-vous que le nom de votre table est correct
+$result = $conn->query($query);
+
+$produits = [];
+if ($result->rowCount() > 0) { // Utilisez rowCount() au lieu de num_rows
+    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+        $produits[] = $row;
+    }
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -17,6 +36,7 @@
 
         body {
             font-family: Arial, sans-serif;
+        
         }
 
         .header {
@@ -70,9 +90,11 @@
         }
 
         .search-bar {
+            max-width: 60%;
             display: flex;
             align-items: center;
             gap: 1rem;
+            margin-left:20%
         }
 
         .home-button {
@@ -324,30 +346,29 @@
     </div>
 
     <div class="products-grid">
-        <!-- Répétition de la carte produit plusieurs fois -->
-        <div class="carte-produit">
-            <div class="badge-nouveau">Nouveau</div>
-            <img src="../img/refrig.jpg" alt="Fer à Vapeur" />
-            <h3 class="titre">Fer à Vapeur</h3>
-            <p class="prix">5 000 FCFA</p>
-            <div class="evaluation">⭐⭐⭐⭐⭐</div>
-            <button class="btn-panier">
-                <svg width="20" height="20" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M17 18c-1.11 0-2 .89-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2M1 2v2h2l3.6 7.59l-1.35 2.45c-.16.28-.25.61-.25.96a2 2 0 0 0 2 2h12v-2H7.42a.25.25 0 0 1-.25-.25c0-.05.01-.09.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1.003 1.003 0 0 0 20 4H5.21l-.94-2M7 18c-1.11 0-2 .89-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2Z"/>
-                </svg>
-                Ajouter au panier
-            </button>
-            <button class="btn-acheter">
-                <svg width="20" height="20" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M5 6h14c.55 0 1.02-.2 1.41-.59c.4-.39.59-.86.59-1.41s-.2-1.02-.59-1.41C20.02 2.2 19.55 2 19 2H5c-.55 0-1.02.2-1.41.59C3.2 2.98 3 3.45 3 4s.2 1.02.59 1.41C3.98 5.8 4.45 6 5 6m0 4h14c.55 0 1.02-.2 1.41-.59c.4-.39.59-.86.59-1.41s-.2-1.02-.59-1.41C20.02 6.2 19.55 6 19 6H5c-.55 0-1.02.2-1.41.59C3.2 6.98 3 7.45 3 8s.2 1.02.59 1.41C3.98 9.8 4.45 10 5 10M5 14h14c.55 0 1.02-.2 1.41-.59c.4-.39.59-.86.59-1.41s-.2-1.02-.59-1.41C20.02 10.2 19.55 10 19 10H5c-.55 0-1.02.2-1.41.59C3.2 10.98 3 11.45 3 12s.2 1.02.59 1.41c.39.4.86.59 1.41.59M5 18h14c.55 0 1.02-.2 1.41-.59c.4-.39.59-.86.59-1.41s-.2-1.02-.59-1.41C20.02 14.2 19.55 14 19 14H5c-.55 0-1.02.2-1.41.59C3.2 14.98 3 15.45 3 16s.2 1.02.59 1.41c.39.4.86.59 1.41.59"/>
-                </svg>
-                Acheter
-            </button>
-        </div>
-
-        <!-- Répétition de la même carte 5 autres fois -->
-        <!-- Copier-coller du bloc carte-produit 5 fois -->
+        <?php foreach ($produits as $produit): ?>
+            <div class="carte-produit">
+                <div class="badge-nouveau">Nouveau</div>
+                <img src="<?php echo $produit['imageProduit']; ?>" alt="<?php echo $produit['nomProduit']; ?>" />
+                <h3 class="titre"><?php echo $produit['nomProduit']; ?></h3>
+                <p class="prix"><?php echo number_format($produit['prixUniProduit'], 0, ',', ' ') . ' FCFA'; ?></p>
+                <div class="evaluation">⭐⭐⭐⭐⭐</div>
+                <button class="btn-panier">
+                    <svg width="20" height="20" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M17 18c-1.11 0-2 .89-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2M1 2v2h2l3.6 7.59l-1.35 2.45c-.16.28-.25.61-.25.96a2 2 0 0 0 2 2h12v-2H7.42a.25.25 0 0 1-.25-.25c0-.05.01-.09.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1.003 1.003 0 0 0 20 4H5.21l-.94-2M7 18c-1.11 0-2 .89-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2Z"/>
+                    </svg>
+                    Ajouter au panier
+                </button>
+                <button class="btn-acheter">
+                    <svg width="20" height="20" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M5 6h14c.55 0 1.02-.2 1.41-.59c.4-.39.59-.86.59-1.41s-.2-1.02-.59-1.41C20.02 2.2 19.55 2 19 2H5c-.55 0-1.02.2-1.41.59C3.2 2.98 3 3.45 3 4s.2 1.02.59 1.41C3.98 5.8 4.45 6 5 6m0 4h14c.55 0 1.02-.2 1.41-.59c.4-.39.59-.86.59-1.41s-.2-1.02-.59-1.41C20.02 6.2 19.55 6 19 6H5c-.55 0-1.02.2-1.41.59C3.2 6.98 3 7.45 3 8s.2 1.02.59 1.41C3.98 9.8 4.45 10 5 10M5 14h14c.55 0 1.02-.2 1.41-.59c.4-.39.59-.86.59-1.41s-.2-1.02-.59-1.41C20.02 10.2 19.55 10 19 10H5c-.55 0-1.02.2-1.41.59C3.2 10.98 3 11.45 3 12s.2 1.02.59 1.41c.39.4.86.59 1.41.59M5 18h14c.55 0 1.02-.2 1.41-.59c.4-.39.59-.86.59-1.41s-.2-1.02-.59-1.41C20.02 14.2 19.55 14 19 14H5c-.55 0-1.02.2-1.41.59C3.2 14.98 3 15.45 3 16s.2 1.02.59 1.41c.39.4.86.59 1.41.59"/>
+                    </svg>
+                    Acheter
+                </button>
+            </div>
+        <?php endforeach; ?>
     </div>
+
     <script>
         
     </script>

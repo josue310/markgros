@@ -39,6 +39,7 @@ if (isset($postData['connexion'])) {
                             'email_partenaire' => $email,
                             'nom_partenaire' => $compte['nomPartenaire']
                         ];
+                       
 
                         // Redirection vers la page d'accueil
                         redirectToUrl('dashbordPartenaire.php');
