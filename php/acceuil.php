@@ -367,7 +367,9 @@ if ($result->rowCount() > 0) { // Utilisez rowCount() au lieu de num_rows
                 </button>
             </div>
         <?php endforeach; ?>
+
     </div>
+    <?php require_once("footer.php") ?>
 
     <script>
         
