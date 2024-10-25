@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_email'] = $emailUtilisateur;
 
             // Rediriger vers la page d'accueil ou tableau de bord
-            header("Location: accueil.php");
+            header("Location: acceuil.php");
             exit();
         } else {
             // Mauvais mot de passe
