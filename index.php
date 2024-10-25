@@ -14,7 +14,7 @@
             <a href="./php/inscription.php" class="btn btn-signup">S'inscrire</a>
             <a href="./php/connexion.php" class="btn btn-login">Se connecter</a>
         </div>
-        <a href="accueil.html" class="ignore">Ou ignorer</a>
+        <a href="php/accueil.php" class="ignore">Ou ignorer</a>
     </div>
 </body>
 </html>
