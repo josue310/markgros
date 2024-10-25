@@ -345,5 +345,8 @@
         <!-- Répétition de la même carte 5 autres fois -->
         <!-- Copier-coller du bloc carte-produit 5 fois -->
     </div>
+    <script>
+        
+    </script>
 </body>
 </html>

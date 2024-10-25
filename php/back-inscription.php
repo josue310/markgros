@@ -4,7 +4,7 @@
 require 'C:/xampp/htdocs/markgros/bd/connexionDB.php';
 
 // Démarrer une session
-session_start();
+// session_start();
 
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -87,8 +87,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Stocker les informations de l'utilisateur dans la session
             // $_SESSION['user_id'] = $user_id;
-            $_SESSION['tel'] = $tel;
-            $_SESSION['email'] = $email;
+            // $_SESSION['tel'] = $tel;
+            // $_SESSION['email'] = $email;
 
             // Rediriger vers la page de connexion ou afficher un message de succès
             header("Location: connexion.php");
