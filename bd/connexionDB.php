@@ -5,7 +5,7 @@
 // Connexion à la base de données
 $servername = "localhost";
 $username = "root";  // À adapter selon votre configuration
-$password = "josue2005";  // À adapter selon votre configuration
+$password = "";  // À adapter selon votre configuration
 $dbname = "markgros";  // Remplacez par le nom de votre base de données
 
 // Création de la connexion
