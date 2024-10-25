@@ -1,8 +1,33 @@
+<?php
+// Démarrer la session
+session_start();
+
+// Vérifier si l'utilisateur est connecté, sinon rediriger vers la page de connexion
+if (!isset($_SESSION['user_id'])) {
+    header("Location: connexion.php");
+    exit();
+}
+
+// Inclure le fichier de configuration pour la connexion à la base de données
+require 'C:/xampp/htdocs/markgros/bd/connexionDB.php';
+
+// Récupérer les informations de l'utilisateur connecté depuis la base de données
+$sql = "SELECT nomUtilisateur, prenomUtilisateur, telUtilisateur, emailUtilisateur, dateNaissUtilisateur, photoUtilisateur 
+        FROM utilisateur WHERE idUtilisateur = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $_SESSION['user_id']);
+$stmt->execute();
+$stmt->bind_result($nom, $prenom, $telephone, $email, $date_naissance, $photo);
+$stmt->fetch();
+$stmt->close();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informations Personnelles</title>
     <link rel="stylesheet" href="../css/infoPerson.css">
     <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
@@ -21,35 +46,27 @@
 
             <div class="info-utilisateur">
                 <div class="photo-utilisateur">
-                    <img src="../img/portrait-father-his-backyard.jpg" alt="Photo de l'utilisateur" class="photo" />
-                </div>
-                <div class="champ">
-                    <label for="matricule">Numéro de matricule :</label>
-                    <p id="matricule">MATRICULE123</p>
+                    <img src="<?php echo htmlspecialchars($photo); ?>" alt="Photo de l'utilisateur" class="photo" />
                 </div>
                 <div class="champ">
                     <label for="nom">Nom :</label>
-                    <p id="nom">Dupont</p>
+                    <p id="nom"><?php echo htmlspecialchars($nom); ?></p>
                 </div>
                 <div class="champ">
                     <label for="prenom">Prénom :</label>
-                    <p id="prenom">Jean</p>
+                    <p id="prenom"><?php echo htmlspecialchars($prenom); ?></p>
                 </div>
                 <div class="champ">
                     <label for="date-naissance">Date de naissance :</label>
-                    <p id="date-naissance">01/01/1990</p>
+                    <p id="date-naissance"><?php echo htmlspecialchars($date_naissance); ?></p>
                 </div>
                 <div class="champ">
-                    <label for="ville">Ville :</label>
-                    <p id="ville">Abidjan</p>
+                    <label for="ville">Téléphone :</label>
+                    <p id="telephone"><?php echo htmlspecialchars($telephone); ?></p>
                 </div>
                 <div class="champ">
                     <label for="email">Email :</label>
-                    <p id="email">jean.dupont@example.com</p>
-                </div>
-                <div class="champ">
-                    <label for="telephone">Téléphone :</label>
-                    <p id="telephone">+225 07 12 34 56</p>
+                    <p id="email"><?php echo htmlspecialchars($email); ?></p>
                 </div>
             </div>
 

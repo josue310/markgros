@@ -14,7 +14,7 @@
             <div class="logo-text">Mark<span>gros</span></div>
         </div>
         
-        <form>
+        <form action="back-connexion.php" method="post">
             <div class="form-group">
                 <label for="tel">Numéro de téléphone</label>
                 <div class="input-container">
@@ -46,7 +46,7 @@
 
         <div class="signup-link">
             <p>Pas encore de compte ?</p>
-            <a href="register.html" class="signup-btn">
+            <a href="inscription.php" class="signup-btn">
                 <i class="fas fa-user-plus"></i> S'inscrire
             </a>
         </div>
